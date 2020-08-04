@@ -94,33 +94,114 @@ void Main()
 // -- Instance vs static members --
 
 // some memory - loaded inside RAM
-public class Panda 
+//public class Panda 
+//{
+//	public string Name; 				// Instance field
+//	public static int Population;			// Static Field
+//	public static string Century;
+//	
+//	public Panda(string n) 		// constructor
+//	{
+//		Name = n;					// assign the instance field
+//		Population = Population + 1;	// Increment the static population field
+//	}
+//}
+//
+//void Main()
+//{
+//	Panda p1 = new Panda("Pan Dee");
+//	Panda p2 = new Panda("Pan Dah");
+//	Panda p3 = new Panda("Pan Dah 2");
+//	
+//	Console.WriteLine(p1.Name);
+//	Console.WriteLine(p2.Name);
+//	
+//	//Console.WriteLine(p1.Population);
+//	//Console.WriteLine(p2.Population);
+//	
+//	Console.WriteLine(Panda.Population);
+//}
+
+// -- Conversions --
+
+//void Main()
+//{
+//	int x = 12345;  		//32-bit integer
+//	long y = x; 			//Implicit conversion to 64-bit integer
+//	short z = (short)x; 	// 16-bit integer (Explicit conversion)
+//}
+
+// -- Value types vs reference types
+
+// custom type
+// value type
+public struct Point 
 {
-	public string Name; 				// Instance field
-	public static int Population;			// Static Field
-	public static string Century;
-	
-	public Panda(string n) 		// constructor
-	{
-		Name = n;					// assign the instance field
-		Population = Population + 1;	// Increment the static population field
-	}
+	public int X, Y; //fields
 }
 
-void Main()
+// reference type
+public class Point2
 {
-	Panda p1 = new Panda("Pan Dee");
-	Panda p2 = new Panda("Pan Dah");
-	Panda p3 = new Panda("Pan Dah 2");
-	
-	Console.WriteLine(p1.Name);
-	Console.WriteLine(p2.Name);
-	
-	//Console.WriteLine(p1.Population);
-	//Console.WriteLine(p2.Population);
-	
-	Console.WriteLine(Panda.Population);
+	public int X, Y; //fields
 }
+
+//static void Main() 
+//{
+//	Point p1 = new Point();	//value type object
+//	p1.X = 7;
+//	
+//	Point p2 = p1;		//Assignment causes copy via value (value types)
+//	
+//	Console.WriteLine(p1.X);
+//	Console.WriteLine(p2.X);
+//	
+//	p1.X = 9;	// Change p1.X
+//	
+//	Console.WriteLine(p1.X);
+//	Console.WriteLine(p2.X);
+//	
+//	//Point2 p3 = new Point2();	//reference type object
+//	//p3.X = 7;
+//	//
+//	//Point2 p4 = p3;		//Assignment causes copy via reference (reference types)
+//	//
+//	//Console.WriteLine(p3.X);
+//	//Console.WriteLine(p4.X);
+//	//
+//	//p3.X = 9;	// Change p1.X
+//	//
+//	//Console.WriteLine(p3.X);
+//	//Console.WriteLine(p4.X);
+//	
+//	// -- Null
+//	// Point p = null; // cannot make it null
+//	// Point2 p = null; // null reference
+//}
+
+// struct - Int32, Boolean - value types (when something can't be null)
+// classes - String - reference types (when objects can take null values)
+// interface ~ class
+
+//static void Main()
+//{
+//	int a = 10;
+//    int b = a; //copy via value
+//    a = 20;
+//
+//    string name1 = "abc";
+//   	string name2 = name1; // copy via reference
+//    name1 = "abc2";
+//	
+//	Console.WriteLine(b);
+//	
+//	Console.WriteLine(name2);
+//}
+
+
+
+
+
 
 
 
