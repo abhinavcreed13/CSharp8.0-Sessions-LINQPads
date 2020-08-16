@@ -63,6 +63,51 @@ void Main()
 }
 */
 
+// Multidimensional array
+// Rectangular and jagged
 
+// Rectangular arrays
+/*void Main()
+{
+	// 3 x 3 matrix - 2D array
+	int[,] matrix = new int[3,3];
+	//Console.WriteLine(matrix[0,1]);
+	// row loop
+	for(int i=0; i < matrix.GetLength(0); i++)
+	{
+		//Console.WriteLine(i);
+		// column loop
+		for(int j=0; j< matrix.GetLength(1); j++)
+		{
+			//Console.WriteLine(j);
+			matrix[i,j] = i * 3 + j;
+		}
+	}
+	//Console.WriteLine(matrix[2,2]);
+}*/
+
+// Jagged arrays
+void Main()
+{
+	// 3 x ? matrix - 2D array
+	/*
+	int[][] matrix = new int[3][];
+	for(int i=0; i< matrix.Length; i++)
+	{
+		matrix[i] = new int[3]; // create inner array
+		for(int j=0; j< matrix[i].Length; j++){
+			matrix[i][j] = i * 3 + j;
+		}
+	}
+	*/
+	// matrix init syntax - default values
+	// array of arrays
+	int[][] matrix = new int[][]
+	{
+		new int[] {0,1,2},
+		new int[] {3,4,5},
+		new int[] {6,7,8,9,10}
+	}
+}
 
 // Define other methods, classes and namespaces here
