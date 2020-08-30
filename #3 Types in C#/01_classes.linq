@@ -152,14 +152,79 @@ class Rectangle
 	}	
 }
 
-void Main()
+/*void Main()
 {
-	var rect = new Rectangle(a,b); // fire my constructor
+	var rect = new Rectangle(3,4); // fire my constructor
 	(float width, float height) = rect;			// deconstruction
 	Console.WriteLine(width + " "+ height);
-}
+}*/
 
 // Object Initializers
+// introduced in C# 3.0
+public class Bunny
+{
+	public string Name;	// field
+	public bool LikesCarrots;
+	public bool LikesHumans;
+	
+	public Bunny() {}
+	public Bunny(string n){ Name = n; }
+}
+
+/*void Main()
+{
+	// object initializers
+	// will only work if fields are public
+	Bunny b1 = new Bunny {
+		Name = "Bo",
+		LikesCarrots = true,
+		LikesHumans = false
+	};
+	
+	Bunny b2 = new Bunny("bo");
+	b2.LikesCarrots = true;
+	
+	List<Bunny> vals = new List<Bunny>();
+	vals.Add(new Bunny("bo1"));
+	vals.Add(new Bunny("bo2"));
+	vals.Add(new Bunny("bo3"));
+	
+	// object initializer - list initializer syntax
+	List<Bunny> vals2 = new List<Bunny> {
+		new Bunny("bo1"),
+		new Bunny("bo2"),
+		new Bunny("bo3")
+	};
+}*/
+
+// The 'this' reference
+// 'this' reference refers to the instance itself
+// this will be the one who is calling it or method
+public class Panda
+{
+	public Panda Mate;
+	
+	public string Name;
+	
+	public void Marry(Panda partner)
+	{
+		Mate = partner; // save reference of p2 to Mate
+		partner.Mate = this;   // this here is p1 because p1.Marry(p2);
+	}
+}
+
+void Main()
+{
+	Panda p1 = new Panda { Name = "p1" };
+	Panda p2 = new Panda { Name = "p2" }; // get reference - init
+	
+	p1.Marry(p2); // passed reference of p2
+	
+	Console.WriteLine(p1.Mate.Name);
+	Console.WriteLine(p2.Mate.Name);
+}
+
+
 
 
 
