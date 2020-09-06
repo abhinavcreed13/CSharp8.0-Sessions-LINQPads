@@ -1,6 +1,6 @@
 <Query Kind="Program" />
 
-// Classes
+// ~~~~~~~~~~ Classes ~~~~~~~~~~~~
 
 // class - most common kind of reference type
 // Preceding keywords - public, internal, abstract, sealed, static, unsafe, partial
@@ -19,7 +19,7 @@ class Octopus
 	}
 }
 
-// -- Constants --
+// -------- Constants ----------
 // const keyword - evaluated statically at compile time and the compiler literally substitutes its value whenever used
 // differs from readonly field -> readonly field can be assigned inside constructor
 public class Test
@@ -43,7 +43,7 @@ public class Test
 	}
 }
 
-// -- Methods --
+// ------------ Methods -------------
 // method performs an action in a series of statements
 // !! method can recieve input data by parameters and have output data back !!
 // method have a !!signature!! -> signature is name, parameters, function return type, access modifier
@@ -86,7 +86,7 @@ float Foo(int x)
 }
 */
 
-// -- Instance Constructors --
+// ---------- Instance Constructors ----------
 // Constructors run <initilization code> on a class or struct
 // Modifiers:
 // Access modifiers: public, private(singleton design pattern), protected, internal
@@ -133,7 +133,8 @@ public class Wine
 //	Console.WriteLine(w.Price); // fire the Price get function
 //}
 
-// Destructors - does the reverse and assigns fields back to a set of variables
+// ---------- Destructors ---------- 
+// does the reverse and assigns fields back to a set of variables
 class Rectangle
 {
 	public readonly float Width, Height;
@@ -159,7 +160,7 @@ class Rectangle
 	Console.WriteLine(width + " "+ height);
 }*/
 
-// Object Initializers
+// --------- Object Initializers --------------
 // introduced in C# 3.0
 public class Bunny
 {
@@ -197,7 +198,7 @@ public class Bunny
 	};
 }*/
 
-// The 'this' reference
+// --------- The 'this' reference -----------
 // 'this' reference refers to the instance itself
 // this will be the one who is calling it or method
 public class Panda
@@ -224,6 +225,7 @@ void Main()
 	Console.WriteLine(p2.Mate.Name);
 }
 
+// --------- Properties ----------
 
 
 
