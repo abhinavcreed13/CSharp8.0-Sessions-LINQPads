@@ -214,7 +214,7 @@ public class Panda
 	}
 }
 
-void Main()
+/*void Main()
 {
 	Panda p1 = new Panda { Name = "p1" };
 	Panda p2 = new Panda { Name = "p2" }; // get reference - init
@@ -223,9 +223,40 @@ void Main()
 	
 	Console.WriteLine(p1.Mate.Name);
 	Console.WriteLine(p2.Mate.Name);
-}
+}*/
 
 // --------- Properties ----------
+public class Stock
+{	
+	// GENERAL PATTERN
+	decimal currentPrice; 		// private "backing" field
+	
+	public decimal CurrentPrice		// public property
+	{
+		get { return currentPrice; }
+		set { currentPrice = value; }
+	}
+	
+	public decimal NewCurrentPrice { get; set;}  // it is implicitly having backing field
+	
+	public void Add()
+	{
+		currentPrice = currentPrice + 1;	// private
+		CurrentPrice = CurrentPrice + 1;	// public
+	}
+}
+
+void Main()
+{
+	Stock msft = new Stock();
+	msft.CurrentPrice = 30;	// fired set
+	msft.CurrentPrice -= 3;
+	Console.WriteLine(msft.CurrentPrice);	// fired get
+}
+
+
+
+
 
 
 

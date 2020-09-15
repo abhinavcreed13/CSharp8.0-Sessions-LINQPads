@@ -126,19 +126,20 @@ Task GoAsync()
 // DisplayPrimeCounts() is not running on a new thread
 async void DisplayPrimeCounts()
 {
+	//int await = 10;
 	for(int i=0;i<10; i++)
 	{
-		/*
-		var awaiter = GetPrimesCountAsync(i*100+2, 100000).GetAwaiter();
-		// run this when completed
-		awaiter.OnCompleted(() =>
-			Console.WriteLine(awaiter.GetResult())
-		);
-		*/
+		
+		//var awaiter = GetPrimesCountAsync(i*100+2, 100000).GetAwaiter();
+		//// run this when completed
+		//awaiter.OnCompleted(() =>
+		//	Console.WriteLine(awaiter.GetResult())
+		//);
+		
 		// Call GetPrimesCountAsync asynchonously but I will wait for your answer
-		//int result = await GetPrimesCountAsync(i*100+2, 100000);
-		await GoAsync();
-		//Console.WriteLine(result);
+		int result = await GetPrimesCountAsync(i*100+2, 100000);
+		//await GoAsync();
+		Console.WriteLine(result);
 	}
 	Console.WriteLine("Done");
 }
