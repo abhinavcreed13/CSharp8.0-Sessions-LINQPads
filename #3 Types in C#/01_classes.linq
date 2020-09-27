@@ -229,7 +229,7 @@ public class Panda
 public class Stock
 {	
 	// GENERAL PATTERN
-	decimal currentPrice; 		// private "backing" field
+	decimal currentPrice, sharesOwned = 12; 		// private "backing" field
 	
 	public decimal CurrentPrice		// public property
 	{
@@ -239,21 +239,180 @@ public class Stock
 	
 	public decimal NewCurrentPrice { get; set;}  // it is implicitly having backing field
 	
+	// read-only property
+	//public decimal Worth
+	//{
+	//	get { return currentPrice * sharesOwned; }
+	//}
+	
+	// --- expression-bodied properties ---
+	//public decimal Worth => currentPrice * sharesOwned;
+	
+	public decimal Worth 
+	{
+		get => currentPrice * sharesOwned;
+		//set => sharesOwned = value/currentPrice;
+	}
+	
+	// Automatic properties
+	public decimal AutoCurrentPrice { get; set; }
+	
+	// Property initializers
+	public decimal AutoCurrentPrice2 { get; set; } = 123;
+	public int Maximum { get; } = 999;
+	
 	public void Add()
 	{
 		currentPrice = currentPrice + 1;	// private
 		CurrentPrice = CurrentPrice + 1;	// public
+		AutoCurrentPrice = 123;
 	}
 }
 
-void Main()
+//void Main()
+//{
+//	Stock msft = new Stock();
+//	msft.CurrentPrice = 30;	// fired set
+//	msft.CurrentPrice -= 3;
+//	Console.WriteLine(msft.CurrentPrice);	// fired get
+//	Console.WriteLine(msft.Worth);
+//	//msft.Worth = 10; // not allowed - read-only property
+//}
+
+// get + set accessibility
+public class Foo
 {
-	Stock msft = new Stock();
-	msft.CurrentPrice = 30;	// fired set
-	msft.CurrentPrice -= 3;
-	Console.WriteLine(msft.CurrentPrice);	// fired get
+	private decimal x;
+	public decimal Xprop
+	{
+		get => x;
+		// can only be set inside the class
+		private set { 
+			// many lines logic
+			//....
+			x = Math.Round(value, 2);
+		}
+	}
+	
+	public Foo()
+	{
+		x = 123.12344M;
+		Xprop = 123.123455M;  // This works - because I'm inside class
+	}
 }
 
+//void Main()
+//{
+//	Foo f = new Foo();
+//	Console.WriteLine(f.Xprop);
+//}
+
+// -------------- Indexers ----------------
+class Sentence
+{
+	string[] words = new string[5];
+	
+	public Sentence(string s)
+	{
+		words = s.Split();
+	}
+	
+	// pattern for indexer
+	public string this[int wordNum]		// indexer
+	{
+		get { return words[wordNum]; }
+		set { words[wordNum] = value; }
+	}
+	
+	//public Person this[int index]
+	//{
+	//	get { return persons[index]; }
+	//}
+}
+
+//void Main()
+//{
+//	string s = "hello there";
+//	Console.WriteLine(s[0]);
+//	Console.WriteLine(s[2]);
+//	
+//	// want to implement indexing for words?
+//	Sentence s2 = new Sentence("The quick brown fox");
+//	//Console.WriteLine(s2[0]); // The
+//	//Console.WriteLine(s2[1]); // quick
+//	//s2[0] = "More";
+//	//Console.WriteLine(s2[0]);
+//	for(int i=0;i<3;i++){
+//		Console.WriteLine(s2[i]);
+//	}
+//}
+
+// -------------- Static Constructors -----------------
+// created a class that is initilized only ONCE!!
+class Test2
+{
+	static Test2()
+	{	
+		Console.WriteLine("Type Initialized");
+	}
+}
+
+class Foo2 
+{
+	//public static int Y = 3;
+	//public static int X = Y;
+	
+	// static is assigned memory - line by line
+	public static Foo2 Instance = new Foo2();
+	public static int X = 3;
+	public int Y {get;set;} = 23;
+	
+	public Foo2()
+	{
+		Console.WriteLine(X);  // 0
+	}
+}
+
+//void Main()
+//{
+//	//Test2 t1 = new Test2();
+//	//Test2 t2 = new Test2();
+//	
+//	Console.WriteLine(Foo2.X); // 3
+//	
+//	Foo2 foo = new Foo2();
+//	//Console.WriteLine(Foo2.Y); // wont' work: because we need constructor/object to access it
+//	Console.WriteLine(foo.Y);
+//}
+
+// ------ Partial Types & Methods ----------
+// partial methods -> needs implementation signature in 1 class, then only you can implement it
+partial class PaymentForm 
+{
+	partial void ValidatePayment(decimal amount);
+}
+
+partial class PaymentForm
+{
+	partial void ValidatePayment(decimal amount)
+	{
+		if(amount > 100){
+			Console.WriteLine(amount);
+		}
+	}
+}
+
+// ------------ nameof -------------
+// nameof operator returns the name of any symbol
+// advantage: rather than specifying string, you can use variables -> compile-time safety
+// extremely useful for: RedirectToAction -> takes name of the function
+void Main()
+{
+	int count = 123;
+	string name = nameof(count);
+	string name2 = nameof(StringBuilder.Length);
+	Console.WriteLine(name2);
+}
 
 
 
