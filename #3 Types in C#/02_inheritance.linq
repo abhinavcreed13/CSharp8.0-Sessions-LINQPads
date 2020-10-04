@@ -64,10 +64,10 @@ public class Stock2: IAsset
 
 // !! References are polymorphic !!
 // References can change forms - default nature
-public static void Display(Asset asset)
-{
-	Console.WriteLine(asset.Name);
-}
+//public static void Display(Asset asset)
+//{
+//	Console.WriteLine(asset.Name);
+//}
 
 // -- Function overloading
 // Same function name with different parameters
@@ -175,37 +175,111 @@ public static void Display(Asset asset)
 // virtual: methods, properties, indexers, events
 
 // virtual properties
-public class Asset
+//public class Asset
+//{
+//	public string Name; // field
+//	public virtual decimal Liability => 0;		// expression-bodied property
+//}
+//
+//// child class
+//public class Stock : Asset // inherits from Asset
+//{
+//	public long SharesOwned;
+//}
+//
+//// child class
+//public class House: Asset
+//{
+//	public decimal Mortgage;
+//	public override decimal Liability => Mortgage;
+//}
+
+//void Main()
+//{
+//	Asset b = new Asset();
+//	Console.WriteLine(b.Liability);	
+//	
+//	House mansion = new House { Name = "McMansion", Mortgage = 25000 };
+//	Asset a = mansion;						// upcast - connected references
+//	Console.WriteLine(mansion.Liability);	// 25000
+//	Console.WriteLine(a.Liability);			// 25000 (it can't be 0) calling -> mansion.Liability
+//}
+
+// --- Abstract Classes & Abstract Members ---
+// Abstract class - no constructor - cannot be instantiated
+// using this abstract class - I can create concrete subclasses
+// Abstract class - !! define abstract members !!
+
+public abstract class Asset
 {
-	public string Name; // field
-	public virtual decimal Liability => 0;		// expression-bodied property
+	// not possible with interface
+	public abstract decimal NetValue {get; }
 }
 
-// child class
-public class Stock : Asset // inherits from Asset
+public class Stock: Asset
 {
 	public long SharesOwned;
+	public decimal CurrentPrice;
+	
+	public override decimal NetValue => SharesOwned * CurrentPrice;
 }
 
-// child class
-public class House: Asset
+//void Main()
+//{
+//	//Asset a = new Asset(); 				// Not possible
+//	Stock msft = new Stock { SharesOwned = 100, CurrentPrice = 50 };
+//	Console.WriteLine(msft.NetValue);
+//	Asset a = msft;  					// upcast - connecting references (Asset is abstract and object can't be created)
+//	Console.WriteLine(a.NetValue);		// called -> msft.NetValue
+//}
+
+// --- Hiding Inherited Members ---
+public class A
 {
-	public decimal Mortgage;
-	public override decimal Liability => Mortgage;
+	public int Counter = 1;
+}
+
+public class B: A
+{
+	// I am hiding inherited member
+	// public int Counter = 2;
+		
+	// new modifier -> does nothing more than suppress the compiler warning
+	public new int Counter = 2;
+}
+
+//void Main()
+//{
+//	B b = new B();
+//	Console.WriteLine(b.Counter);
+//}
+
+// new vs override
+public class BaseClass
+{
+	public virtual void Foo() { Console.WriteLine("BaseClass.Foo"); }
+}
+
+public class Overrider: BaseClass
+{
+	public override void Foo() { Console.WriteLine("Overrider.Foo"); }
+}
+
+public class Hider: BaseClass
+{
+	public new void Foo() { Console.WriteLine("Hider.Foo"); }
 }
 
 void Main()
 {
-	Asset b = new Asset();
-	Console.WriteLine(b.Liability);	
+	Overrider over = new Overrider();
+	BaseClass b1 = over;				// upcast - connecting references
+	over.Foo();							// Overrider.Foo
+	b1.Foo();							// called -> over.Foo() -> Overrider.Foo
 	
-	House mansion = new House { Name = "McMansion", Mortgage = 25000 };
-	Asset a = mansion;						// upcast - connected references
-	Console.WriteLine(mansion.Liability);	// 25000
-	Console.WriteLine(a.Liability);			// 25000 (it can't be 0) calling -> mansion.Liability
+	Hider h = new Hider();
+	BaseClass b2 = h;					// upcast - connecting references
+	h.Foo();							// Hider.Foo
+	b2.Foo();							// called -> b2.Foo() -> BaseClass.Foo
 }
-
-// --- Abstract Classes & Abstract Members ---
-// Abstract class - no constructor - cannot be instantiated
-
 
