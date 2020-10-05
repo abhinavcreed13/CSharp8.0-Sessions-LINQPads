@@ -85,7 +85,7 @@ public class Stock2: IAsset
 //{
 //	Stock msft = new Stock { SharesOwned = 1000, Name = "MFST" };
 //	House mansion = new House { Name = "Mansion", Mortgage = 250000 };
-//	Display(msft);
+//	Display(msft);		// Asset asset = msft
 //	Display(mansion);
 //}
 
@@ -210,19 +210,19 @@ public class Stock2: IAsset
 // using this abstract class - I can create concrete subclasses
 // Abstract class - !! define abstract members !!
 
-public abstract class Asset
-{
-	// not possible with interface
-	public abstract decimal NetValue {get; }
-}
-
-public class Stock: Asset
-{
-	public long SharesOwned;
-	public decimal CurrentPrice;
-	
-	public override decimal NetValue => SharesOwned * CurrentPrice;
-}
+//public abstract class Asset
+//{
+//	// not possible with interface
+//	public abstract decimal NetValue {get; }
+//}
+//
+//public class Stock: Asset
+//{
+//	public long SharesOwned;
+//	public decimal CurrentPrice;
+//	
+//	public override decimal NetValue => SharesOwned * CurrentPrice;
+//}
 
 //void Main()
 //{
@@ -234,19 +234,19 @@ public class Stock: Asset
 //}
 
 // --- Hiding Inherited Members ---
-public class A
-{
-	public int Counter = 1;
-}
-
-public class B: A
-{
-	// I am hiding inherited member
-	// public int Counter = 2;
-		
-	// new modifier -> does nothing more than suppress the compiler warning
-	public new int Counter = 2;
-}
+//public class A
+//{
+//	public int Counter = 1;
+//}
+//
+//public class B: A
+//{
+//	// I am hiding inherited member
+//	// public int Counter = 2;
+//		
+//	// new modifier -> does nothing more than suppress the compiler warning
+//	public new int Counter = 2;
+//}
 
 //void Main()
 //{
@@ -255,31 +255,105 @@ public class B: A
 //}
 
 // new vs override
-public class BaseClass
+//public class BaseClass
+//{
+//	public virtual void Foo() { Console.WriteLine("BaseClass.Foo"); }
+//}
+//
+//public class Overrider: BaseClass
+//{
+//	public override void Foo() { Console.WriteLine("Overrider.Foo"); }
+//}
+//
+//public class Hider: BaseClass
+//{
+//	public new void Foo() { Console.WriteLine("Hider.Foo"); }
+//}
+
+//void Main()
+//{
+//	Overrider over = new Overrider();
+//	BaseClass b1 = over;				// upcast - connecting references
+//	over.Foo();							// Overrider.Foo
+//	b1.Foo();							// called -> over.Foo() -> Overrider.Foo
+//	
+//	Hider h = new Hider();
+//	BaseClass b2 = h;					// upcast - connecting references
+//	h.Foo();							// Hider.Foo
+//	b2.Foo();							// called -> b2.Foo() -> BaseClass.Foo
+//}
+
+// -- base keyword
+public class Asset
 {
-	public virtual void Foo() { Console.WriteLine("BaseClass.Foo"); }
+	public string Name; // field
+	public virtual decimal Liability => 20;		// expression-bodied property
+	
+	public virtual int D()
+	{
+		// kind of logic
+		return 20;
+	}
 }
 
-public class Overrider: BaseClass
+// child class
+public class Stock : Asset // inherits from Asset
 {
-	public override void Foo() { Console.WriteLine("Overrider.Foo"); }
+	public long SharesOwned;
 }
 
-public class Hider: BaseClass
+// child class
+public class House: Asset
 {
-	public new void Foo() { Console.WriteLine("Hider.Foo"); }
+	public decimal Mortgage;
+	public override decimal Liability => base.Liability + Mortgage;
+	
+	public override int D()
+	{
+		int a = base.D();
+		return a + 30;
+	}
 }
 
+//void Main()
+//{
+//	House h = new House();
+//	Console.WriteLine(h.D());
+//}
+
+// -- Constructors + Inheritance --
+
+// Constructor chaining
+public class Baseclass
+{
+	public int X;
+	public Baseclass() {
+		Console.WriteLine("Base default called");
+	}
+	public Baseclass(int x) 
+	{ 
+		Console.WriteLine("Base parameterized called");
+		this.X = x; 
+	}
+}
+
+public class Subclass: Baseclass {
+	public int Y;
+	public Subclass() {
+		Console.WriteLine("Subclass default called");
+	}
+	
+	public Subclass(int y) {
+		this.Y = y;
+	}
+}
+
+// Outside world
 void Main()
 {
-	Overrider over = new Overrider();
-	BaseClass b1 = over;				// upcast - connecting references
-	over.Foo();							// Overrider.Foo
-	b1.Foo();							// called -> over.Foo() -> Overrider.Foo
+// 	Subclass s = new Subclass();
 	
-	Hider h = new Hider();
-	BaseClass b2 = h;					// upcast - connecting references
-	h.Foo();							// Hider.Foo
-	b2.Foo();							// called -> b2.Foo() -> BaseClass.Foo
+	Subclass s2 = new Subclass(20);
 }
+
 
