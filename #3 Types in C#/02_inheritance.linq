@@ -343,17 +343,24 @@ public class Subclass: Baseclass {
 		Console.WriteLine("Subclass default called");
 	}
 	
-	public Subclass(int y) {
+	public Subclass(int y): base(y)
+	{
+		Console.WriteLine("Subclass parameterized called");
 		this.Y = y;
+		Console.WriteLine(this.X);
 	}
 }
 
 // Outside world
 void Main()
 {
-// 	Subclass s = new Subclass();
+	// 	Subclass s = new Subclass();
 	
 	Subclass s2 = new Subclass(20);
 }
+
+// Destructors -> order is from calling destructor of derived class to the base class
+// Constructors -> order is from calling constructor of base class to the derived class
+
 
 
