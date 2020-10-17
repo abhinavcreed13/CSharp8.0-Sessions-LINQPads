@@ -352,15 +352,53 @@ public class Subclass: Baseclass {
 }
 
 // Outside world
-void Main()
-{
-	// 	Subclass s = new Subclass();
-	
-	Subclass s2 = new Subclass(20);
-}
+// By default -> parameterized constructor of baseclass is not called by subclass parameterized constructor (must be explicit)
+// Example -> public RestaurantDbContext(DbContextOptions) :base(DbContextOptions)
+//void Main()
+//{
+//	// Subclass s = new Subclass();
+//	
+//	Subclass s2 = new Subclass(20);
+//}
 
 // Destructors -> order is from calling destructor of derived class to the base class
 // Constructors -> order is from calling constructor of base class to the derived class
+
+// -- Constructor & Field Initilization Order --
+
+// No default constructor here
+public class B
+{
+	public int x = 1;						// executes 3rd
+	public B (int baseData)					// x = y + 1 -> Constructors = Memory Allocation			  
+	{
+		// executes 4th
+		Console.WriteLine("executes 4th");
+		this.x = baseData;
+	}
+}
+
+public class D: B
+{
+	int y = 1;						// executes 1st
+	//public D () { }					// Not allowed because there is no default constructor in base class
+	public D (int data)
+			: base(data+1)				// executes 2nd (parameter name is passed)
+	{
+		// executes 5th
+		Console.WriteLine("executes 5th");
+		this.y = data;
+		Console.WriteLine(this.y);
+		Console.WriteLine(this.x);
+	}	
+}
+
+void Main()
+{
+	D dObj = new D(12);
+}
+
+
 
 
 
