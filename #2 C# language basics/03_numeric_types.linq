@@ -31,19 +31,19 @@ void Main()
 */
 
 // Numeric suffixes
-/*void Main()
-{
-	float f = 1.23F;	
-	double d = 1.23D;
-	decimal d2 = 1.23M;
-	
-	uint i = 1U;
-	
-	long j = 1L;
-	
-	ulong k = 1UL;
-}
-*/
+//void Main()
+//{
+//	float f = 1.23F;	
+//	double d = 1.23D;
+//	decimal d2 = 1.23M;
+//	
+//	uint i = 1U;
+//	
+//	long j = 1L;
+//	
+//	ulong k = 1UL;
+//}
+
 
 // Numeric conversions !! - (truncation)
 /*
@@ -62,50 +62,52 @@ void Main()
 // -- Arithmetic operators
 // Increment, Decrement operators (++, --)
 // cool interview coding round
-/*
-void Main()
-{
-	int x=0, y=0;
-	Console.WriteLine(x++);
-	Console.WriteLine(++x);
-	Console.WriteLine(++y);
-}
-*/
+
+//void Main()
+//{
+//	int x=0, y=0;
+//	int c = x++; // 0 -> lazy evaluation
+//	int d = ++x; // 2 -> normal evaluation
+//	Console.WriteLine(x++);
+//	Console.WriteLine(++x);
+//	Console.WriteLine(++y);
+//}
+
 
 // Specialized Operations on Integral Types
 //void Main()
 //{
-	// Division
-	// int a = 4/3; // truncation
-	// Console.WriteLine(a);
-	
-	// Overflow
-	/*int a = int.MinValue;
-	a--;	// Overflow exception is avoided here
-	Console.WriteLine(a == int.MaxValue); //True*/
-	
-	//Overflow check operators (checked)
-	/*
-	int a = 1000000;
-	int b = 1000000;
-	
-	//int c = checked (a * b);
-	
-	checked 
-	{
-		int d = a + b;
-		int e = a * b;
-	}
-	//Console.WriteLine(c);
-	*/
-	
-	// unchecked
-	/*
-	int x = int.MaxValue;
-	int y = unchecked(x+1);
-	
-	Console.WriteLine(y);
-	*/
+//	// Division
+//	//int a = 4/3; // truncation
+//	//Console.WriteLine(a);
+//	
+//	// Overflow
+//	//int a = int.MinValue;
+//	//a--;	// Overflow exception is avoided here
+//	//Console.WriteLine(a == int.MaxValue); //True*/
+//	
+//	// Overflow check operators (checked)
+//	
+//	//int a = 1000000;
+//	//int b = 1000000;
+//	
+//	//int c = checked (a * b);
+//	
+//	//checked 
+//	//{
+//	//	int d = a + b;
+//	//	int e = a * b;
+//	//}
+//	//Console.WriteLine(c);
+//	
+//	
+//	// unchecked
+//	
+//	//int x = int.MaxValue;
+//	//int y = unchecked(x+1);
+//	//
+//	//Console.WriteLine(y);
+//	
 //}
 
 // --- Bitwise Operators ---

@@ -24,7 +24,14 @@ void Main()
 void Main()
 {
 	//// sequence of unicode characters
-	//string a = "test";
+	string a = "ta"; // -> "aa"
+	Console.WriteLine(a[0]);
+	/*
+	var l = a.Split("");
+	l[0] = "T";
+	a = String.Join(l.ToArray());
+	Console.WriteLine(a[0]);
+	*/
 	//foreach(char c in a) //For this foreach to work, we need IEnumerable interface (enumerating ability)
 	//{
 	//	Console.WriteLine(c);
@@ -45,7 +52,7 @@ void Main()
 	
 	// ! verbatim strings !
 	// \\server\fileshare\helloworld.cs
-	/*
+	
 	string a1 = "\\\\server\\fileshare\\helloworld.cs";
 	
 	string a2 = @"\\server\fileshare\helloworld.cs"; // verbatim string
@@ -59,7 +66,7 @@ void Main()
 	string xml = @"<customer id=""123""></customer>"; // verbatim - can't escape double quotes
 	
 	Console.WriteLine(xml);
-	*/
+	
 	
 	// -- String concatenation
 	// private static string operator +(Object? a, Object? b) - operator overloading
@@ -76,9 +83,11 @@ void Main()
 	// string preceded with the $ character - interpolated string
 	//int x = 4;
 	//string color = "red";
-	//Console.WriteLine($"A square has {x} sides, {color} color");
+	//Console.WriteLine("A square has" + x + "sides, " + color + " color");
 	//
 	//Console.WriteLine(string.Format("A square has {0} sides, {1} color", x, color));
+	//
+	//Console.WriteLine($"A square has {x} sides, {color} color");
 	
 	//string s = $"255 in hex is {byte.MaxValue:X2}"; // 2-digit hexadecimal (formatting)
 	//Console.WriteLine(s);

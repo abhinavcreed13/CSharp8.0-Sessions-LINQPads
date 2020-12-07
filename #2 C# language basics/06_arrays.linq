@@ -2,8 +2,8 @@
 
 //void Main()
 //{
-	// Arrays - represents a fixed number of variables(elements) of a particular type
-	//char [] vowels = new char[5]; //Declare an array of 5 characters
+//	// Arrays - represents a fixed number of variables(elements) of a particular type
+//	char [] vowels = new char[5]; //Declare an array of 5 characters
 	//
 	//vowels[0] = 'a';
 	//vowels[1] = 'e';
@@ -27,18 +27,24 @@
 	//}
 	
 	// array initialization expression
-	// char[] vowels = new char[]{'a', 'e', 'i', 'o', 'u'}; //char of 5 elements
+	//char[] vowels = new char[]{'a', 'e', 'i', 'o', 'u'}; //char of 5 elements
 	
 	// char[] vowels = {'a', 'e', 'i', 'o', 'u'};
 	
 	// default element initilization
-	//int[] a = new int[1000];
+//	List<int> a1 = new List<int>();
+//
+//	int[] a2 = new int[1000];  // -> stack
 	//Console.WriteLine(a[123]); // default - 0
+	
+	
+	
 //}
 
-/*
+// value type -> directly have access to the address space -> there is no null
 public struct Point { public int X,Y; }
-	
+
+// reference type -> doesn't have direct access to the address space -> new allocation
 public class Point2 { public int X,Y; }
 	
 void Main()
@@ -50,18 +56,19 @@ void Main()
 	Console.WriteLine(x1);
 	
 	Point2[] b = new Point2[1000]; // collection of reference types
-	//int x2 = b[500].X;			// RunTime Error - NullReferenceException
+	//Point2[] c = b;
+	//int x2 = b[500].X;			// RunTime Error - NullReferenceException (NullPointerException)
 	
 	for(int i=0; i < b.Length; i++)
 	{
 		b[i] = new Point2();
 	}
-	
+	//
 	int x2 = b[500].X;
 	
 	Console.WriteLine(x2);
 }
-*/
+
 
 // Multidimensional array
 // Rectangular and jagged

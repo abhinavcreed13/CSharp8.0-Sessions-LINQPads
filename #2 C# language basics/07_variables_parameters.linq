@@ -6,16 +6,24 @@
 // stack 
 // stack - logically grows and shrinks as a <method or function> is entered and exited
 
-/*void Main()
-{
-	static int Factorial(int x)
-	{
-		if(x==0) return 1;
-		return x * Factorial(x-1); // !! Recursion !!
-	}
-}*/
+//void Main()
+//{
+//	static int Factorial(int x)
+//	{
+//		if(x==0) return 1;
+//		return x * Factorial(x-1); // !! Recursion !!
+//	}
+//}
 
-// Stack - LIFO manner - last-in-first-out
+// Factorial(5) -> push 1
+// Factorial(4)
+// Factorial(3)
+// Factorial(2) -> return
+// Factorial(1) -> return
+// Factorial(0) -> return 1
+
+// Stack - LIFO manner - last-in-first-out -> Depth First Search (Tree Search Algo)
+// Queue - FIFO manner - first-in-first-out -> Breadth First Search (Tree Search Algo)
 
 // called -> Factorial(5) -> final answer
 // Factorial(4) ->
@@ -30,6 +38,14 @@
 // whenever your work is done with that object -> GC - garbage collector - managed by CLR - cleans that allocated space on heap
 // value types are never allocated on heap - they return real address values (! struct !)
 
+// heap
+// PointClass p = new PointClass(); (xAE445664 - given by the heap)
+// int a = p.A; (xAE445664 -> try to fetch the value of A -> return that)
+
+// stack
+// int a = b; (xAE45566 - address => get the value out)
+
+
 // Default values
 // All reference types - null
 // All numeric + enum types - 0
@@ -43,62 +59,116 @@
 // None version
 // value types - copy via value
 // !! Functions - <arguments by default are passed by value> !!
-/*static void Foo(int p)
-{
-   p = p + 1;
-   Console.WriteLine(p);
-}
+//void Foo(int p)
+//{
+//   p = p + 1;
+//   Console.WriteLine(p);
+//}
+//
+//void Foo2(StringBuilder fooSb)
+//{
+//	//fooSb = new StringBuilder();
+//	fooSb.Append("test222");
+//	fooSb = null;  // fooSb = null
+//}
+//
+//void Main()
+//{
+//	int x = 8;
+//	//Foo(x);				// p = x
+//	//Console.WriteLine(x);
+//	
+//	StringBuilder sb = new StringBuilder(); // reference type - allocated on heap
+//	Foo2(sb);		//  fooSb = sb;
+//	Console.WriteLine(sb.ToString());
+//}
 
-static void Foo2(StringBuilder fooSb)
-{
-	fooSb.Append("test");
-	fooSb = null;  // fooSb = null
-}
-
-void Main()
-{
-	int x = 8;
-	//Foo(x);				// p = x
-	//Console.WriteLine(x);
-	
-	StringBuilder sb = new StringBuilder(); // reference type - allocated on heap
-	Foo2(sb);		// sb = fooSb
-	Console.WriteLine(sb.ToString());
-}
-*/
+//void Main()
+//{
+//	StringBuilder sb = new StringBuilder();
+//	StringBuilder fooSb = sb;
+//	fooSb.Append("test");
+//	Console.WriteLine(sb.ToString());
+//}
 
 
 // ref version
 // override function default behaviour -> copy via reference
-/*static void Foo(ref int p)
-{
-   p = p + 1;
-   Console.WriteLine(p);
-}
+//void Foo(int p)
+//{
+//   p = p + 1;
+//   //Console.WriteLine(p);
+//}
+//
+//void Foo3(ref StringBuilder fooSb)
+//{
+//	fooSb.Append("test222");
+//	fooSb = null;  // fooSb = null
+//}
+//
+//void Main()
+//{
+//	int x = 8;
+//	Foo(x);				// p = x
+//	Console.WriteLine(x);
+//	
+//	StringBuilder sb = new StringBuilder(); // reference type - allocated on heap
+//	Foo3(ref sb);		// fooSb = sb
+//	Console.WriteLine(sb.ToString());
+//}
 
-static void Foo2(ref StringBuilder fooSb)
-{
-	fooSb.Append("test");
-	fooSb = null;  // fooSb = null
-}
+// ref keyword - docs example
+//class Product
+//{
+//    public Product(string name, int newID)
+//    {
+//        ItemName = name;
+//        ItemID = newID;
+//    }
+//
+//    public string ItemName { get; set; }
+//    public int ItemID { get; set; }
+//}
+//
+//void ChangeByReference(Product itemRef)
+//{
+//    // Change the address that is stored in the itemRef parameter.
+//    itemRef = new Product("Stapler", 99999);
+//
+//    // You can change the value of one of the properties of
+//    // itemRef. The change happens to item in Main as well.
+//    itemRef.ItemID = 12345;
+//	itemRef.ItemName = "Staplers";
+//}
+//
+//void ModifyProductsByReference()
+//{
+//    // Declare an instance of Product and display its initial values.
+//    Product item = new Product("Fasteners", 54321);
+//    System.Console.WriteLine("Original values in Main.  Name: {0}, ID: {1}\n",
+//        item.ItemName, item.ItemID);
+//
+//    // Pass the product instance to ChangeByReference.
+//    ChangeByReference(item);
+//    System.Console.WriteLine("Back in Main.  Name: {0}, ID: {1}\n",
+//        item.ItemName, item.ItemID);
+//}
+//
+//void Main() 
+//{
+//	ModifyProductsByReference();
+//}
 
-void Main()
-{
-	int x = 8;
-	//Foo(ref x);				// p = x
-	//Console.WriteLine(x);
-	
-	StringBuilder sb = new StringBuilder(); // reference type - allocated on heap
-	Foo2(ref sb);		// sb = fooSb
-	Console.WriteLine(sb.ToString());
-}
-*/
+// This method displays the following output:
+// Original values in Main.  Name: Fasteners, ID: 54321
+// Back in Main.  Name: Stapler, ID: 12345
+
 
 // -- out modifier --
 // "this is like a ref" argument except:
 	// 1. it need not be assigned before going into the function
 	// 2. It must be assigned before it comes out of the function
-/*	
+	
 static void Split(string name, out string firstNames, out string lastName)
 {
 	int i = name.LastIndexOf(' ');
@@ -113,7 +183,7 @@ void Main()
 	Console.WriteLine(a);
 	Console.WriteLine(b);
 }
-*/
+
 
 // discards -> underscore
 // previous function, what if I just want firstnames?

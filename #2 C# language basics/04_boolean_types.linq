@@ -35,21 +35,28 @@ void Main()
 // == - equality operator
 
 // short-circuit evaluation
-/*
 static bool UseUmbrella(bool rainy, bool sunny, bool windy)
 {
+	// True && True -> True
+	//bool newWindy = !windy;
+	//Console.WriteLine(!windy);
+	
+	/*if(!windy) {
+		Console.WriteLine("Windy = FALSE");
+	}*/
+	//return !windy ? "Not windy" : "Windy";
 	return !windy && (rainy || sunny);
 }
 
 void Main()
 {
-	Console.WriteLine(UseUmbrella(true, false, true));
+	//Console.WriteLine(UseUmbrella(true, false, true));
 	// as soon as windy is false, then it doesn't check for rainy or sunny
 	
 	Console.WriteLine(UseUmbrella(true, false, false));
 	// even if windy is true, it has to check rainy or sunny statement
 }
-*/
+
 
 // ternary operator
 
@@ -66,6 +73,15 @@ void Main()
 //	}
 //	*/
 //}
+
+/*
+if(dataset.where( --- ).select( --- ).Any()) {
+		// do this
+}
+else {
+
+}
+*/
 
 
 // Define other methods, classes and namespaces here

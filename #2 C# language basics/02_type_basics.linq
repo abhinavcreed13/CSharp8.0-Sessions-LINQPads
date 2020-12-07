@@ -92,8 +92,8 @@ void Main()
 // Custom Types - classes/interface/structs
 
 // -- Instance vs static members --
-
-// some memory - loaded inside RAM
+//
+//// some memory - loaded inside RAM
 //public class Panda 
 //{
 //	public string Name; 				// Instance field
@@ -161,18 +161,25 @@ public class Point2
 //	Console.WriteLine(p1.X);
 //	Console.WriteLine(p2.X);
 //	
-//	//Point2 p3 = new Point2();	//reference type object
-//	//p3.X = 7;
-//	//
-//	//Point2 p4 = p3;		//Assignment causes copy via reference (reference types)
-//	//
-//	//Console.WriteLine(p3.X);
-//	//Console.WriteLine(p4.X);
-//	//
-//	//p3.X = 9;	// Change p1.X
-//	//
-//	//Console.WriteLine(p3.X);
-//	//Console.WriteLine(p4.X);
+//	Point2 p3 = new Point2();	//reference type object
+//	p3.X = 7;
+//	
+//	Point2 p4 = p3;		//Assignment causes copy via reference (reference types)
+//	
+//	Console.WriteLine(p3.X);
+//	Console.WriteLine(p4.X);
+//	
+//	p3.X = 9;	// Change p1.X
+//	
+//	Console.WriteLine(p3.X);
+//	Console.WriteLine(p4.X);
+//	
+//	int a = 10;
+//	
+//	int b = a;
+//	
+//	b = 20;
+//	
 //	
 //	// -- Null
 //	// Point p = null; // cannot make it null
@@ -183,20 +190,20 @@ public class Point2
 // classes - String - reference types (when objects can take null values)
 // interface ~ class
 
-//static void Main()
-//{
-//	int a = 10;
-//    int b = a; //copy via value
-//    a = 20;
-//
-//    string name1 = "abc";
-//   	string name2 = name1; // copy via reference
-//    name1 = "abc2";
-//	
-//	Console.WriteLine(b);
-//	
-//	Console.WriteLine(name2);
-//}
+static void Main()
+{
+	int a = 10;
+    int b = a; //copy via value
+    a = 20;
+
+    string name1 = "abc";
+   	string name2 = name1; // copy via reference
+    name1 = "abc2";
+	
+	Console.WriteLine(b);
+	
+	Console.WriteLine(name2);
+}
 
 
 
