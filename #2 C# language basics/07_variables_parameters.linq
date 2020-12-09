@@ -169,44 +169,46 @@
 	// 1. it need not be assigned before going into the function
 	// 2. It must be assigned before it comes out of the function
 	
-static void Split(string name, out string firstNames, out string lastName)
-{
-	int i = name.LastIndexOf(' ');
-	firstNames = name.Substring(0, i);	// 2. It must be assigned before it comes out of the function
-	lastName = name.Substring(i+1);		// 2. It must be assigned before it comes out of the function
-}
-
-void Main()
-{
-	string a,b;  // 1. it need not be assigned before going into the function
-	Split("Stevie Ray Vaughan", out a, out b);
-	Console.WriteLine(a);
-	Console.WriteLine(b);
-}
+//static void Split(string name, out string firstNames, out string lastName, out int length)
+//{
+//	int i = name.LastIndexOf(' ');
+//	firstNames = name.Substring(0, i);	// 2. It must be assigned before it comes out of the function
+//	lastName = name.Substring(i+1);		// 2. It must be assigned before it comes out of the function
+//	length = 10;
+//}
+//
+//void Main()
+//{
+//	string a,b;  // 1. it need not be assigned before going into the function
+//	int c;
+//	Split("Stevie Ray Vaughan", out a, out b, out c);
+//	Console.WriteLine(a);
+//	Console.WriteLine(b);
+//	Console.WriteLine(c);
+//}
 
 
 // discards -> underscore
 // previous function, what if I just want firstnames?
-/*
-static void Split(string name, out string firstNames, out string lastName)
-{
-	int i = name.LastIndexOf(' ');
-	firstNames = name.Substring(0, i);	// 2. It must be assigned before it comes out of the function
-	lastName = name.Substring(i+1);		// 2. It must be assigned before it comes out of the function
-}
+//static void Split(string name, out string firstNames, out string lastName)
+//{
+//	int i = name.LastIndexOf(' ');
+//	firstNames = name.Substring(0, i);	// 2. It must be assigned before it comes out of the function
+//	lastName = name.Substring(i+1);		// 2. It must be assigned before it comes out of the function
+//}
+//
+//void Main()
+//{
+//	// string _ = "a"; -> allowed
+//	string a;  // 1. it need not be assigned before going into the function
+//	Split("Stevie Ray Vaughan", out a, out _);
+//	Console.WriteLine(a);
+//	//Console.WriteLine(b);
+//	
+//	// after C# 7 >
+//	//SomeBigMethod(out _, out _, out _, out getthis, out _, out _, out _)
+//}
 
-void Main()
-{
-	// string _ = "a"; -> allowed
-	string a;  // 1. it need not be assigned before going into the function
-	Split("Stevie Ray Vaughan", out a, out _);
-	Console.WriteLine(a);
-	Console.WriteLine(b);
-	
-	// after C# 7 >
-	// SomeBigMethod(out _, out _, out _, out getthis, out _, out _, out _)
-}
-*/
 
 // -- in modifier --
 // "in parameter is similar to ref" except:
@@ -221,33 +223,37 @@ void Main()
 // must be declared as an array - value types !!
 // can't use ref here
 // this is call by value - default!!
-/*static int Sum(params int[] ints)
-{
-	int sum = 0;
-	for(int i=0; i< ints.Length;i++){
-		sum += ints[i];
-	}
-	return sum;
-}
-
-void Main()
-{
-	int total = Sum(1,2,3,4,5,6,7,8,9);
-	Console.WriteLine(total);
-}*/
+//static int Sum(params int[] ints)
+//{
+//	int sum = 0;
+//	for(int i=0; i< ints.Length;i++){
+//		sum += ints[i];
+//	}
+//	return sum;
+//}
+//
+//
+//void Main()
+//{
+//	int total = Sum(1,2,3,4,5,6,7,8,9);
+//	Console.WriteLine(total);
+//	
+//	//List<int> vals = new List<int>{1,2,3,4,5,6,7,8,9};
+//	//int total2 = Sum2(vals);
+//}
 
 // Optional parameters
 // they are always placed at the end
 /*
 static void Foo(int y, int x = 8)
 {
-	x = x + 1;
+	y = y + x;
 }
 
 void Main()
 {
 	int y = 2;
-	Foo(y);
+	Foo(y, 10);
 }
 */
 
@@ -255,7 +261,7 @@ void Main()
 /*
 static void Foo(int y, int z)
 {
-	y = xy + 1;
+	y = y + 1;
 }
 
 void Main()
@@ -264,18 +270,18 @@ void Main()
 	Foo(y,z); // first way
 	Foo(y:2, z:3);  // named parameters way of calling
 	Foo(z:3, y:2);
-	Foo(z:3, y); // not allowed
+	//Foo(z:3, y); // not allowed
 }
 */
 
 // C# 7 > - ref locals + ref returns
 // ref local
-/*void Main()
-{
-	int [] numbers = {0,1,2,3,4};
-	ref int numRef = ref numbers[2];
-	numRef = 3; // change here -> it will impact numbers at 2nd index
-}*/
+//void Main()
+//{
+//	int[] numbers = {0,1,2,3,4};
+//	ref int numRef = ref numbers[2];
+//	numRef = 3; // change here -> it will impact numbers at 2nd index
+//}
 
 // ref returns
 /*
@@ -296,14 +302,21 @@ void Main()
 // var - implicitly typed local variables
 // var is always known at compile time
 // dynamic is always known at runtime
-/*
+
 void Main()
 {
-	var x = "Hello";
+	//var x = 16;
+	//x = x + 1;
+	//x = x + "abc";
+	
+	//dynamic x = 16;
+	//x = x + 16;
+	//x = x + "abc";
+	
 	// usecase
 	//System.Text.StringBuilder y = new System.Text.StringBuilder();
 	//var y = new System.Text.StringBuilder();
 }
-*/
+
 
 

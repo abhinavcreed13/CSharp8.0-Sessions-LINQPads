@@ -8,23 +8,22 @@
 
 // Local variables
 // always scoped inside the braces {}
-/*
-void Main()
-{
-	int x; // defined 
-	{
-		int y;
-		int x; // Error - x is already defined
-	}
-	{
-		int y; // OK - y not in scope
-	}
-	Console.WriteLine(y); // Error - y is out of scope
-}
-*/
+//
+//void Main()
+//{
+//	int x; // defined 
+//	{
+//		int y;
+//		int x; // Error - x is already defined
+//	}
+//	{
+//		int y; // OK - y not in scope
+//	}
+//	Console.WriteLine(y); // Error - y is out of scope
+//}
 
 // Selection Statements -> if, switch
-// Conditional operator -> ?:
+// Conditional operator -> a ? a : a
 // Loop statements -> while, for, foreach, do-while
 /*
 void Main()
@@ -93,58 +92,58 @@ void Main()
 //}
 
 // (C# 7+) - you can also switch on 'types'
-/*
-static void TellMeTheType(object x)
-{
-	switch(x)
-	{
-		case int i:
-			Console.WriteLine("It's an int!");
-			Console.WriteLine($"The square of {i} is {i*i}");
-			break;
-		case string s:
-			Console.WriteLine("It's a string!");
-			Console.WriteLine($"The length of {s} is {s.Length}");
-			break;
-		default:
-			Console.WriteLine("I don't know what x is");
-			break;
-	}
-}
 
-void Main()
-{
-	TellMeTheType(10);
-	TellMeTheType(11);
-	TellMeTheType("hello");
-	TellMeTheType(false);
-}
-*/
+//static void TellMeTheType(object x)
+//{
+//	switch(x)
+//	{
+//		case int i:
+//			Console.WriteLine("It's an int!");
+//			Console.WriteLine($"The square of {i} is {i*i}");
+//			break;
+//		case string s:
+//			Console.WriteLine("It's a string!");
+//			Console.WriteLine($"The length of {s} is {s.Length}");
+//			break;
+//		default:
+//			Console.WriteLine("I don't know what x is");
+//			break;
+//	}
+//}
+//
+//void Main()
+//{
+//	TellMeTheType(10);
+//	TellMeTheType(11);
+//	TellMeTheType("hello");
+//	TellMeTheType(false);
+//}
+
 
 // switch expressions (C# 8+)
-/*
-void Main()
-{
-	int cardNumber = 13;
-	// switch expression - can get you the cardName as per the cardNumber
-	string cardName = cardNumber switch
-	{
-		13 => "King",
-		12 => "Queen",
-		11 => "Jack",
-		_ => "Pip Card" // equivalent to 'default'
-	};
-	Console.WriteLine(cardName);
-	
-	string suit = "spades";
-	string cardName2 = (cardNumber, suit) switch
-	{
-		(13, "spades") => "king of spades",
-		_ => "Pip Card"
-	};
-	Console.WriteLine(cardName2);
-}
-*/
+//
+//void Main()
+//{
+//	int cardNumber = 13;
+//	// switch expression - can get you the cardName as per the cardNumber
+//	string cardName = cardNumber switch
+//	{
+//		13 => "King",
+//		12 => "Queen",
+//		11 => "Jack",
+//		_ => "Pip Card" // equivalent to 'default'
+//	};
+//	Console.WriteLine(cardName);
+//	
+//	string suit = "spades";
+//	string cardName2 = (cardNumber, suit) switch
+//	{
+//		(13, "spades") => "king of spades",
+//		_ => "Pip Card"
+//	};
+//	Console.WriteLine(cardName2);
+//}
+
 
 // Iteration statements - while, do-while, for, foreach
 // foreach - will only work for enumerable objects (IEnumerable interface)
