@@ -7,6 +7,8 @@
 
 // Field - is a variable that is a member of a class or struct (or attributes)
 // --> variable should be inside the scope of the class
+
+// If you create a field directly, it will never auto-generate any property
 class Octopus
 {
 	string name; 			// field - by default private
@@ -80,6 +82,7 @@ void Foo(int x, float y)
 
 }
 
+// return type should be same otherwise compile-time error
 float Foo(int x)
 {
 
@@ -114,21 +117,29 @@ public class Wine
 		set { _Price = value; }
 	}
 	
-	public Wine(decimal price)
+	public Wine(decimal price4)
 	{
-		_Price = price;
+		_Price = price4;
 	}
 	
-	public Wine(decimal price, int year) : this(price)   // overloaded constructor
+	public Wine(decimal price2, int year) : this(price2)   // overloaded constructor
 	{
 		//_Price = price; // this can be avoided
 		Year = year;
 	}
+	
+	// new Wine(10, 2004, 12)
+	// order of this(price, year) is important to call right constructor with correct data
+	public Wine(decimal price, int year, int val) : this(price, year)
+	{
+		
+	}
 }
 
+//
 //void Main()
 //{
-//	Wine w = new Wine(10);
+//	Wine w = new Wine(10, 2004);
 //	w.Price = 20;   // fire the Price set function
 //	Console.WriteLine(w.Price); // fire the Price get function
 //}
@@ -146,6 +157,7 @@ class Rectangle
 	}
 	
 	// destructor
+	// function name has to match deconstruct (by convention)
 	public void Deconstruct(out float width, out float height)
 	{
 		width = Width;
@@ -153,12 +165,12 @@ class Rectangle
 	}	
 }
 
-/*void Main()
-{
-	var rect = new Rectangle(3,4); // fire my constructor
-	(float width, float height) = rect;			// deconstruction
-	Console.WriteLine(width + " "+ height);
-}*/
+//void Main()
+//{
+//	var rect = new Rectangle(3,4); // fire my constructor
+//	(float width, float height) = rect;			// deconstruction
+//	Console.WriteLine(width + " "+height);
+//}
 
 // --------- Object Initializers --------------
 // introduced in C# 3.0
@@ -169,13 +181,16 @@ public class Bunny
 	public bool LikesHumans;
 	
 	public Bunny() {}
-	public Bunny(string n){ Name = n; }
+	public Bunny(string Name){ 
+	this.Name = Name; 
+	}
 }
-
-/*void Main()
+/*
+void Main()
 {
 	// object initializers
 	// will only work if fields are public
+	// will only work with default constructor
 	Bunny b1 = new Bunny {
 		Name = "Bo",
 		LikesCarrots = true,
@@ -196,6 +211,8 @@ public class Bunny
 		new Bunny("bo2"),
 		new Bunny("bo3")
 	};
+	
+	List<int> i = new List<int> { 1, 2, 3 };
 }*/
 
 // --------- The 'this' reference -----------
@@ -210,20 +227,23 @@ public class Panda
 	public void Marry(Panda partner)
 	{
 		Mate = partner; // save reference of p2 to Mate
+		//Console.WriteLine(this.name);
 		partner.Mate = this;   // this here is p1 because p1.Marry(p2);
 	}
 }
 
-/*void Main()
-{
-	Panda p1 = new Panda { Name = "p1" };
-	Panda p2 = new Panda { Name = "p2" }; // get reference - init
-	
-	p1.Marry(p2); // passed reference of p2
-	
-	Console.WriteLine(p1.Mate.Name);
-	Console.WriteLine(p2.Mate.Name);
-}*/
+//void Main()
+//{
+//	Panda p1 = new Panda { Name = "p1" };
+//	Panda p2 = new Panda { Name = "p2" }; // get reference - init
+//	
+//	p1.Marry(p2); // passed reference of p2
+//	
+//	//p2.Marry(p1);
+//	
+//	Console.WriteLine(p1.Mate.Name);
+//	Console.WriteLine(p2.Mate.Name);
+//}
 
 // --------- Properties ----------
 public class Stock
@@ -251,7 +271,7 @@ public class Stock
 	public decimal Worth 
 	{
 		get => currentPrice * sharesOwned;
-		//set => sharesOwned = value/currentPrice;
+		set => sharesOwned = value/currentPrice;
 	}
 	
 	// Automatic properties
@@ -290,10 +310,11 @@ public class Foo
 		private set { 
 			// many lines logic
 			//....
-			x = Math.Round(value, 2);
+			x = Math.Round(value, 2); //123.12
 		}
 	}
 	
+	// constructor
 	public Foo()
 	{
 		x = 123.12344M;
@@ -305,6 +326,7 @@ public class Foo
 //{
 //	Foo f = new Foo();
 //	Console.WriteLine(f.Xprop);
+//	f.Xprop = 12.345M;
 //}
 
 // -------------- Indexers ----------------
@@ -335,11 +357,19 @@ class Sentence
 //	string s = "hello there";
 //	Console.WriteLine(s[0]);
 //	Console.WriteLine(s[2]);
+//	//s[0] = "t";
 //	
 //	// want to implement indexing for words?
 //	Sentence s2 = new Sentence("The quick brown fox");
-//	//Console.WriteLine(s2[0]); // The
-//	//Console.WriteLine(s2[1]); // quick
+//	//List<person> people = new List<person>();
+//	//People p = new People();
+//	//p[0] -> person 1
+//	//p[1] -> person 2
+//	//Restaurants r = new Restuarnts();
+//	//r[0] -> restaurant 1
+//	Console.WriteLine(s2[0]); // The
+//	Console.WriteLine(s2[1]); // quick
+//	//s2[0] = "The2";
 //	//s2[0] = "More";
 //	//Console.WriteLine(s2[0]);
 //	for(int i=0;i<3;i++){
@@ -351,8 +381,10 @@ class Sentence
 // created a class that is initilized only ONCE!!
 class Test2
 {
+	public static string name;
 	static Test2()
 	{	
+		name = "abc";
 		Console.WriteLine("Type Initialized");
 	}
 }
@@ -373,17 +405,18 @@ class Foo2
 	}
 }
 
-//void Main()
-//{
-//	//Test2 t1 = new Test2();
-//	//Test2 t2 = new Test2();
-//	
-//	Console.WriteLine(Foo2.X); // 3
-//	
-//	Foo2 foo = new Foo2();
-//	//Console.WriteLine(Foo2.Y); // wont' work: because we need constructor/object to access it
-//	Console.WriteLine(foo.Y);
-//}
+void Main()
+{
+	Test2 t1 = new Test2();
+	Test2 t2 = new Test2();
+	Console.WriteLine(Test2.name);
+	
+	Console.WriteLine(Foo2.X); // 3
+	
+	Foo2 foo = new Foo2();
+	//Console.WriteLine(Foo2.Y); // wont' work: because we need constructor/object to access it
+	Console.WriteLine(foo.Y);
+}
 
 // ------ Partial Types & Methods ----------
 // partial methods -> needs implementation signature in 1 class, then only you can implement it
@@ -406,13 +439,13 @@ partial class PaymentForm
 // nameof operator returns the name of any symbol
 // advantage: rather than specifying string, you can use variables -> compile-time safety
 // extremely useful for: RedirectToAction -> takes name of the function
-void Main()
-{
-	int count = 123;
-	string name = nameof(count);
-	string name2 = nameof(StringBuilder.Length);
-	Console.WriteLine(name2);
-}
+//void Main()
+//{
+//	int count = 123;
+//	string name = nameof(count);
+//	string name2 = nameof(StringBuilder.Length);
+//	Console.WriteLine(name2);
+//}
 
 
 

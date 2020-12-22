@@ -8,41 +8,42 @@
 
 // Interface - kind of functions(memo) - No constructor (No memory initilization)
 // abstract class - no constructor
-public interface IAsset
-{
-	public void Display();
-}
-
-public class Stock2: IAsset
-{
-	public string Name; // field
-	
-	public void Display()
-	{
-		Console.WriteLine("HEllo");
-	}
-}
+// Remote Procedure Call (RPC)
+//public interface IAsset
+//{
+//	public void Display();
+//}
+//
+//public class Stock2: IAsset
+//{
+//	public string Name; // field
+//	
+//	public void Display()
+//	{
+//		Console.WriteLine("HEllo");
+//	}
+//}
 
 // parent class
 // had a constructor - memory allocation
-//public class Asset
-//{
-//	public string Name; // field
-//}
-//
-//// child class
-//public class Stock : Asset // inherits from Asset
-//{
-//	public long SharesOwned;
-//}
-//
-//// child class
-//public class House: Asset
-//{
-//	public decimal Mortgage;
-//}
+public class Asset
+{
+	public string Name; // field
+}
 
+// child class
+public class Stock : Asset // inherits from Asset
+{
+	public long SharesOwned;
+}
 
+// child class
+public class House: Asset
+{
+	public decimal Mortgage;
+}
+//
+//
 //void Main()
 //{
 //	// Object initilization syntax
@@ -55,7 +56,7 @@ public class Stock2: IAsset
 //	House mansion = new House { Name = "Mansion", Mortgage = 250000 };
 //	Console.WriteLine(mansion.Name);
 //	Console.WriteLine(mansion.Mortgage);
-//	//Console.WriteLine(mansion.SharesOwned) // won't work
+//	Console.WriteLine(mansion.SharesOwned); // won't work
 //}
 
 // ---------- Polymorphism ----------
@@ -64,10 +65,10 @@ public class Stock2: IAsset
 
 // !! References are polymorphic !!
 // References can change forms - default nature
-//public static void Display(Asset asset)
-//{
-//	Console.WriteLine(asset.Name);
-//}
+public static void Display(Asset asset)
+{
+	Console.WriteLine(asset.Name);
+}
 
 // -- Function overloading
 // Same function name with different parameters
@@ -81,13 +82,13 @@ public class Stock2: IAsset
 //	Console.WriteLine(asset.Name);
 //}
 
-//void Main()
-//{
-//	Stock msft = new Stock { SharesOwned = 1000, Name = "MFST" };
-//	House mansion = new House { Name = "Mansion", Mortgage = 250000 };
-//	Display(msft);		// Asset asset = msft
-//	Display(mansion);
-//}
+void Main()
+{
+	Stock msft = new Stock { SharesOwned = 1000, Name = "MFST" };
+	House mansion = new House { Name = "Mansion", Mortgage = 250000 };
+	Display(msft);		// Asset asset = msft
+	Display(mansion);
+}
 
 // ---- Casting & Reference Conversions ----
 // - Implicitly upcast to a base class reference
@@ -284,36 +285,36 @@ public class Stock2: IAsset
 //}
 
 // -- base keyword
-public class Asset
-{
-	public string Name; // field
-	public virtual decimal Liability => 20;		// expression-bodied property
-	
-	public virtual int D()
-	{
-		// kind of logic
-		return 20;
-	}
-}
-
-// child class
-public class Stock : Asset // inherits from Asset
-{
-	public long SharesOwned;
-}
-
-// child class
-public class House: Asset
-{
-	public decimal Mortgage;
-	public override decimal Liability => base.Liability + Mortgage;
-	
-	public override int D()
-	{
-		int a = base.D();
-		return a + 30;
-	}
-}
+//public class Asset
+//{
+//	public string Name; // field
+//	public virtual decimal Liability => 20;		// expression-bodied property
+//	
+//	public virtual int D()
+//	{
+//		// kind of logic
+//		return 20;
+//	}
+//}
+//
+//// child class
+//public class Stock : Asset // inherits from Asset
+//{
+//	public long SharesOwned;
+//}
+//
+//// child class
+//public class House: Asset
+//{
+//	public decimal Mortgage;
+//	public override decimal Liability => base.Liability + Mortgage;
+//	
+//	public override int D()
+//	{
+//		int a = base.D();
+//		return a + 30;
+//	}
+//}
 
 //void Main()
 //{
@@ -367,36 +368,36 @@ public class Subclass: Baseclass {
 // -- Constructor & Field Initilization Order --
 
 // No default constructor here
-public class B
-{
-	public int x = 1;						// executes 3rd
-	public B (int baseData)					// x = y + 1 -> Constructors = Memory Allocation			  
-	{
-		// executes 4th
-		Console.WriteLine("executes 4th");
-		this.x = baseData;
-	}
-}
-
-public class D: B
-{
-	int y = 1;						// executes 1st
-	//public D () { }					// Not allowed because there is no default constructor in base class
-	public D (int data)
-			: base(data+1)				// executes 2nd (parameter name is passed)
-	{
-		// executes 5th
-		Console.WriteLine("executes 5th");
-		this.y = data;
-		Console.WriteLine(this.y);
-		Console.WriteLine(this.x);
-	}	
-}
-
-void Main()
-{
-	D dObj = new D(12);
-}
+//public class B
+//{
+//	public int x = 1;						// executes 3rd
+//	public B (int baseData)					// x = y + 1 -> Constructors = Memory Allocation			  
+//	{
+//		// executes 4th
+//		Console.WriteLine("executes 4th");
+//		this.x = baseData;
+//	}
+//}
+//
+//public class D: B
+//{
+//	int y = 1;						// executes 1st
+//	//public D () { }					// Not allowed because there is no default constructor in base class
+//	public D (int data)
+//			: base(data+1)				// executes 2nd (parameter name is passed)
+//	{
+//		// executes 5th
+//		Console.WriteLine("executes 5th");
+//		this.y = data;
+//		Console.WriteLine(this.y);
+//		Console.WriteLine(this.x);
+//	}	
+//}
+//
+//void Main()
+//{
+//	D dObj = new D(12);
+//}
 
 
 
