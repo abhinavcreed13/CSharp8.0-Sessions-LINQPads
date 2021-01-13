@@ -6,6 +6,7 @@
 // Any type can be upcast to object
 
 // LIFO data structure
+// Custom stack "data structure" which can take any type
 public class Stack
 {
 	int position;
@@ -13,6 +14,8 @@ public class Stack
 	public void Push(object obj)
 	{
 		// if position = 0 -> data[0] and then position = 1
+		//data[position] = obj;
+		//position = position + 1;
 		data[position++] = obj;
 	}
 	public object Pop()
@@ -45,8 +48,15 @@ public class Stack
 //	
 //	int y = (int)obj;		// Unbox the int ~ Downcast
 //	
-//	object obj2 = 9;
+//	//int? z = obj as int?;
+//	
+//	object obj2 = "9";
 //	long z = (long)obj2;	// Unboxing -> object(int) -> long
+//	
+//	//int a = 10;
+//	//int b = Console.ReadLine();
+//	//
+//	//int c = a/b;
 //}
 
 // -- GetType Method and typeof Operator
@@ -61,17 +71,28 @@ public class Stack
 // [AllowAnonymous]
 // public void Call() { }
 
-public class Point { public int X,Y; }
+public class Point { 
+	public int X,Y; 
+	public override string ToString() {
+		return $"{X},{Y} -> Point";
+	}
+}
 
-//void Main()
-//{
-//	Point p = new Point();
-//	Console.WriteLine(p.GetType().Name);				// Point ~ <Reflection> -> class name of the object p
-//	Console.WriteLine(typeof(Point).Name);				// typeof(Point) ~ Type object -> Name property
-//	Console.WriteLine(p.GetType() == typeof(Point));	// True
-//	Console.WriteLine(p.X.GetType().Name);				// What are you X?
-//	Console.WriteLine(p.Y.GetType().FullName);			// What are you Y?
-//}
+void Main()
+{
+	Point p = new Point();
+	p.X = 10;
+	p.Y = 20;
+	string s = "abc";
+	string s2 = s;
+	s2 = "bcd";
+	//Console.WriteLine(p.GetType().Name);				// Point ~ <Reflection> -> class name of the object p
+	//Console.WriteLine(typeof(Point).Name);				// typeof(Point) ~ Type object -> Name property
+	//Console.WriteLine(p.GetType() == typeof(Point));	// True
+	//Console.WriteLine(p.X.GetType().Name);				// What are you X?
+	//Console.WriteLine(p.Y.GetType().FullName);			// What are you Y?
+	Console.WriteLine(p.ToString());
+}
 
 public class Panda
 {
@@ -80,9 +101,9 @@ public class Panda
 	public override string ToString() => Name + " " + LastName;
 }
 
-void Main()
-{
-	Panda p = new Panda { Name = "Mark", LastName = "222" };
-	Console.WriteLine(p.ToString());
-}
+//void Main()
+//{
+//	Panda p = new Panda { Name = "Mark", LastName = "222" };
+//	Console.WriteLine(p.ToString());
+//}
 

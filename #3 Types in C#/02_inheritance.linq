@@ -65,10 +65,10 @@ public class House: Asset
 
 // !! References are polymorphic !!
 // References can change forms - default nature
-public static void Display(Asset asset)
-{
-	Console.WriteLine(asset.Name);
-}
+//public static void Display(Asset asset)
+//{
+//	Console.WriteLine(asset.Name);
+//}
 
 // -- Function overloading
 // Same function name with different parameters
@@ -82,37 +82,40 @@ public static void Display(Asset asset)
 //	Console.WriteLine(asset.Name);
 //}
 
-void Main()
-{
-	Stock msft = new Stock { SharesOwned = 1000, Name = "MFST" };
-	House mansion = new House { Name = "Mansion", Mortgage = 250000 };
-	Display(msft);		// Asset asset = msft
-	Display(mansion);
-}
+//void Main()
+//{
+//	Stock msft = new Stock { SharesOwned = 1000, Name = "MFST" };
+//	House mansion = new House { Name = "Mansion", Mortgage = 250000 };
+//	Display(msft);		// Asset asset = msft
+//	Display(mansion);
+//}
 
 // ---- Casting & Reference Conversions ----
 // - Implicitly upcast to a base class reference
 // - Explicitly downcast to a subclass reference
 
 // Upcasting
-//void Main()
-//{
-//	Stock msft = new Stock();
-//	Asset a = msft;						// Upcast - implicitly (short-circuit)
-//	Console.WriteLine(a == msft);
-//	//Console.WriteLine(a.Name);			// call -> msft.Name
-//	//Console.WriteLine(a.SharesOwned);		// not possible
-//	//
-//	//Stock2 msft2 = new Stock2();
-//	//Console.WriteLine(msft2.Name);		// allowed
-//	//
-//	//IAsset i = new IAsset();			// because there is no constructor (memory allocation)
-//	//
-//	//IAsset a2 = msft2;					//Upcast - implicitly
-//	//a2.Display(); 						// call -> msft2.Display();
-//	//Console.WriteLine(a2.Name);			// not possible
-//}
+void Main()
+{
+	Stock msft = new Stock();
+	Asset a = msft;						// Upcast - implicitly (short-circuit)
+	Console.WriteLine(a == msft);
+	//Console.WriteLine(a.Name);			// call -> msft.Name
+	//Console.WriteLine(a.SharesOwned);		// not possible
+	//
+	//Stock2 msft2 = new Stock2();
+	//Console.WriteLine(msft2.Name);		// allowed
+	//
+	//IAsset i = new IAsset();			// because there is no constructor (memory allocation)
+	
+	//IAsset a2 = msft2;					//Upcast - implicitly
+	//a2.Display(); 						// call -> msft2.Display();
+	//Console.WriteLine(a2.Name);			// not possible
+}
 
+// List<T> -> System.Collections.Generics;
+
+// Class D: A, IB, IC 
 // Downcasting
 //void Main()
 //{
@@ -126,6 +129,12 @@ void Main()
 //	Console.WriteLine(s.SharesOwned);
 //	Console.WriteLine(s == a);
 //	Console.WriteLine(s == msft);
+//	
+//	string s1 = "abc";
+//	string s2 = s1; // pointer is copied
+//	Console.WriteLine(s2);
+//	s2 = "abc2";
+//	Console.WriteLine(s1);
 //}
 
 // Upcasting - only references are affected - not the underlying object
@@ -136,6 +145,7 @@ void Main()
 //	House h = new House();
 //	Asset a = h;				// upcasted to Asset
 //	Stock s = (Stock)a;			// downcasted to stock? - InvalidCastException
+//	Stock s = a as Stock;      
 //}
 
 // -- as operator
@@ -154,10 +164,10 @@ void Main()
 //	//Asset a = new Asset();
 //	Stock msft = new Stock { SharesOwned = 100};
 //	Asset a = msft;
-//	//if(a is Stock)
-//	//{
-//	//	Console.WriteLine((a as Stock).SharesOwned);
-//	//}
+//	if(a is Stock)
+//	{
+//		Console.WriteLine((a as Stock).SharesOwned);
+//	}
 //	// -- Introduced a pattern variable -- (C# 7+)
 //	if(a is Stock s)
 //	{
@@ -166,6 +176,10 @@ void Main()
 //	if(a is Stock s1 && s1.SharesOwned > 100)
 //	{
 //		Console.WriteLine("Wealthy");
+//	}
+//	
+//	if(s1 && s1.Prop > 100) {
+//	
 //	}
 //}
 
@@ -181,20 +195,20 @@ void Main()
 //	public string Name; // field
 //	public virtual decimal Liability => 0;		// expression-bodied property
 //}
-//
-//// child class
+////
+////// child class
 //public class Stock : Asset // inherits from Asset
 //{
 //	public long SharesOwned;
 //}
-//
-//// child class
+////
+////// child class
 //public class House: Asset
 //{
 //	public decimal Mortgage;
 //	public override decimal Liability => Mortgage;
 //}
-
+//
 //void Main()
 //{
 //	Asset b = new Asset();
@@ -224,7 +238,7 @@ void Main()
 //	
 //	public override decimal NetValue => SharesOwned * CurrentPrice;
 //}
-
+//
 //void Main()
 //{
 //	//Asset a = new Asset(); 				// Not possible
@@ -235,6 +249,7 @@ void Main()
 //}
 
 // --- Hiding Inherited Members ---
+// protected -> available only in inherited classes but not outside
 //public class A
 //{
 //	public int Counter = 1;
@@ -243,12 +258,16 @@ void Main()
 //public class B: A
 //{
 //	// I am hiding inherited member
-//	// public int Counter = 2;
+//	//public int Counter = 2;
+//	
+//	//public void Display() {
+//	//	Console.WriteLine(Counter);
+//	//}
 //		
 //	// new modifier -> does nothing more than suppress the compiler warning
 //	public new int Counter = 2;
 //}
-
+//
 //void Main()
 //{
 //	B b = new B();
@@ -270,14 +289,16 @@ void Main()
 //{
 //	public new void Foo() { Console.WriteLine("Hider.Foo"); }
 //}
-
+//
 //void Main()
 //{
+//	// when overriding -> impossible to reach BaseClass Foo
 //	Overrider over = new Overrider();
 //	BaseClass b1 = over;				// upcast - connecting references
 //	over.Foo();							// Overrider.Foo
 //	b1.Foo();							// called -> over.Foo() -> Overrider.Foo
 //	
+//	// when hiding -> it is possible to reach BaseClass Foo
 //	Hider h = new Hider();
 //	BaseClass b2 = h;					// upcast - connecting references
 //	h.Foo();							// Hider.Foo
@@ -315,7 +336,7 @@ void Main()
 //		return a + 30;
 //	}
 //}
-
+//
 //void Main()
 //{
 //	House h = new House();
@@ -325,6 +346,7 @@ void Main()
 // -- Constructors + Inheritance --
 
 // Constructor chaining
+// First -> base class is initialized always -> then go to derived classes
 public class Baseclass
 {
 	public int X;
@@ -340,6 +362,7 @@ public class Baseclass
 
 public class Subclass: Baseclass {
 	public int Y;
+	
 	public Subclass() {
 		Console.WriteLine("Subclass default called");
 	}
@@ -357,7 +380,7 @@ public class Subclass: Baseclass {
 // Example -> public RestaurantDbContext(DbContextOptions) :base(DbContextOptions)
 //void Main()
 //{
-//	// Subclass s = new Subclass();
+//	//Subclass s = new Subclass();
 //	
 //	Subclass s2 = new Subclass(20);
 //}
@@ -368,36 +391,36 @@ public class Subclass: Baseclass {
 // -- Constructor & Field Initilization Order --
 
 // No default constructor here
-//public class B
-//{
-//	public int x = 1;						// executes 3rd
-//	public B (int baseData)					// x = y + 1 -> Constructors = Memory Allocation			  
-//	{
-//		// executes 4th
-//		Console.WriteLine("executes 4th");
-//		this.x = baseData;
-//	}
-//}
-//
-//public class D: B
-//{
-//	int y = 1;						// executes 1st
-//	//public D () { }					// Not allowed because there is no default constructor in base class
-//	public D (int data)
-//			: base(data+1)				// executes 2nd (parameter name is passed)
-//	{
-//		// executes 5th
-//		Console.WriteLine("executes 5th");
-//		this.y = data;
-//		Console.WriteLine(this.y);
-//		Console.WriteLine(this.x);
-//	}	
-//}
-//
-//void Main()
-//{
-//	D dObj = new D(12);
-//}
+public class B
+{
+	public int x = 1;						// executes 3rd
+	public B (int baseData)					// x = y + 1 -> Constructors = Memory Allocation			  
+	{
+		// executes 4th
+		Console.WriteLine("executes 4th");
+		this.x = baseData;
+	}
+}
+
+public class D: B
+{
+	int y = 1;						// executes 1st
+	//public D () { }					// Not allowed because there is no default constructor in base class
+	public D (int data)
+			: base(data+1)				// executes 2nd (parameter name is passed)
+	{
+		// executes 5th
+		Console.WriteLine("executes 5th");
+		this.y = data;
+		Console.WriteLine(this.y);
+		Console.WriteLine(this.x);
+	}	
+}
+
+void Main()
+{
+	D dObj = new D(12);
+}
 
 
 
