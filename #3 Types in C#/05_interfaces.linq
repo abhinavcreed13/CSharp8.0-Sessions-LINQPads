@@ -30,6 +30,7 @@ internal class Countdown3: IEnumerator
 	public bool MoveNext() => count-- > 0;
 	public object Current => count;
 	public void Reset() { throw new NotSupportedException(); }
+	public void ABC() {}
 }
 
 //object GetData(Countdown c){
@@ -47,17 +48,92 @@ internal class Countdown3: IEnumerator
 object GetData(IEnumerator e){
 	return e.Current;
 }
+//
+//void Main()
+//{
+//	//IEnumerator e = new IEnumerator();
+//	Countdown3 c = new Countdown3();
+//	c.ABC();
+//	IEnumerator e = new Countdown3();
+//	e.ABC();
+//	Countdown c1 = new Countdown();
+//	Countdown2 c2 = new Countdown2();
+//	Countdown3 c3 = new Countdown3();
+//	while(c3.MoveNext()) // e.MoveNext() -> c.MoveNext()
+//	{ 
+//		Console.WriteLine(GetData(c3)); // Implicit upcasting to IEnumerator
+//	}
+//}
+
+// -- Extending an Interface --
+
+// This is a valid syntax - interface can derive other interfaces
+//public interface IUndoable { void Undo(); }
+//public interface IRedoable: IUndoable { void Redo(); }
+
+// We need to implement both methods - Undo() and Redo()
+//public class RedoType: IRedoable
+//{
+//  public void Redo() {}  
+//  public void Undo() {}
+//}
+
+// -- Explicit Interface Implementation --
+
+public interface I1 { void Foo(); }
+public interface I2 { int Foo(); }
+
+// This is multiple inheritance which is only possible with interfaces
+public class Widget: I1, I2
+{
+   public void Foo() {
+   		Console.WriteLine("I1.Foo()");
+   }
+   
+   int I2.Foo() {
+   		Console.WriteLine("I2.Foo()");
+   		return 0;
+   }
+}
+
+//void Main()
+//{
+//	Widget w = new Widget();
+//	w.Foo(); // Widget's implementation of I1.Foo
+//	//I2 i2 = w;
+//	//i2.Foo();
+//	((I2)w).Foo(); // This will call widget's I2.Foo implementation
+//}
+
+// -- Implementing Interface Members Virtually --
+
+public interface IUndoable { void Undo(); }
+
+public class TextBox: IUndoable
+{
+	public virtual void Undo() => Console.WriteLine("TextBox.Undo");
+}
+
+public class RichTextBox: TextBox
+{
+	public void A() {}
+	public override void Undo() => Console.WriteLine("RichTextBox.Undo");
+}
 
 void Main()
 {
-	//IEnumerator e = new IEnumerator();
-	//IEnumerator e = new Countdown();
-	Countdown c1 = new Countdown();
-	Countdown2 c2 = new Countdown2();
-	Countdown3 c3 = new Countdown3();
-	while(c3.MoveNext()) // e.MoveNext() -> c.MoveNext()
-	{ 
-		Console.WriteLine(GetData(c3)); // Implicit upcasting to IEnumerator
-	}
+	RichTextBox r = new RichTextBox();
+	r.Undo(); // RichTextBox -> Undo
+	
+	// making r -> TextBox
+	Textbox t = r;
+	((TextBox)r).Undo();
+	
+	// making r -> IUndoable
+	IUndoable i = r;  // this is same as ((IUndoable)r)
+	i.Undo();
+	((IUndoable)r).Undo(); 
+	// This is not possible because IUndoable is having no A() method -> even though Richtextbox has
+	i.A();
+	((IUndoable)r).A();
 }
-
