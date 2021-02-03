@@ -120,20 +120,38 @@ public class RichTextBox: TextBox
 	public override void Undo() => Console.WriteLine("RichTextBox.Undo");
 }
 
+// practical example of Upcasting concept - Inheritance
+// IUndoable obj = r (this will happen at runtime)
+public void Display(IUndoable obj)
+{
+	//obj.Undo() -> r.Undo();
+}
+
 void Main()
 {
 	RichTextBox r = new RichTextBox();
 	r.Undo(); // RichTextBox -> Undo
 	
 	// making r -> TextBox
-	Textbox t = r;
+	TextBox t = r;
+	t.Undo(); //  RichTextBox -> Undo
 	((TextBox)r).Undo();
 	
 	// making r -> IUndoable
-	IUndoable i = r;  // this is same as ((IUndoable)r)
+	//IUndoable i = r;  // this is same as ((IUndoable)r)
+	//i.Undo();
+	IUndoable i = r;
 	i.Undo();
 	((IUndoable)r).Undo(); 
 	// This is not possible because IUndoable is having no A() method -> even though Richtextbox has
-	i.A();
-	((IUndoable)r).A();
+	//i.A();
+	//((IUndoable)r).A();
+	
+	// Will be implicitly casted to IUndoable object
+	// IUndoable obj = r;
+	Display(r);
 }
+
+// 1 Utility -> !! Dependency Injection !! - microservices !!
+
+

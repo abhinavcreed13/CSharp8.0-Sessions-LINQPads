@@ -26,18 +26,18 @@ public class Stack
 	}
 }
 
-//void Main()
-//{
-//	Stack stack = new Stack();
-//	stack.Push("sausage");					//implicit upcast: string to object
-//	stack.Push("sausage 2");
-//	stack.Push("sausage 3");
-//	stack.Push(12);
-//	stack.Push(12.5667);
-//	object s = stack.Pop();					//explicit downcast: Object to string
-//	//string s = (string) stack.Pop();
-//	Console.WriteLine(s);
-//}
+void Main()
+{
+	Stack stack = new Stack();
+	stack.Push("sausage");					//implicit upcast: string to object
+	stack.Push("sausage 2");
+	stack.Push("sausage 3");
+	stack.Push(12);
+	stack.Push(12.5667);
+	object s = stack.Pop();					//explicit downcast: Object to string
+	//string s = (string) stack.Pop();
+	Console.WriteLine(s);
+}
 
 // -- Boxing and Unboxing ~ Upcast and Downcast
 
