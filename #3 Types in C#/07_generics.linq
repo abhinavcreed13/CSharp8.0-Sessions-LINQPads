@@ -103,5 +103,29 @@ class GenericClass<T,U> where T: SomeClass, Interface1
 	
 }
 
+// IComparable<T>
+// structure
+//public interface IComparable<T>
+//{
+//	int CompareTo(T other);
+//}
+
+// this T will accept only those types which are deriving from IComparable<T>
+// only those types which have some Implementation/Logic of IComparable<T>
+static T Max<T>(T a, T b) where T: IComparable<T>
+{
+	return a.CompareTo(b) > 0 ? a: b;
+}
+
+void Main()
+{
+	string x = "abcdefg";
+	string y = "abcde";
+	//Console.WriteLine(x.CompareTo(y));
+	Console.WriteLine(Max(x, y));
+}
+
+
+
 
 
